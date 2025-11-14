@@ -25,6 +25,11 @@
   --border-color: #e4e7eb;
   --footer-color: #222222;
   --accent-color: #565656;
+
+  /* Media queries breakpoints */
+  --mobile-breakpoint: 40em; /* 650px */
+  --tablet-breakpoint: 65em; /* 1024px */
+  --desktop-breakpoint: 90em; /* 1440px */
 }
 
 /* Suisse Intl (regular) */
@@ -423,6 +428,8 @@ main a:first-of-type {
   font-size: 1em;
 }
 
+/* Footer buttons: op mobiel gecentreerd, op desktop links uitgelijnd (zie media query in index.css) */
+
 /* hover: kleuren omdraaien */
 main section:not(:first-of-type) a:first-of-type:hover,
 main a:first-of-type:hover {
@@ -430,8 +437,8 @@ main a:first-of-type:hover {
   color: var(--primary-text-color);
 }
 
-/* Boek gratis testrit knop */
-main > section > a:nth-of-type(2) {
+/* Boek gratis testrit knop - op mobiel gecentreerd, op desktop links uitgelijnd (zie media query in index.css) */
+main > section > footer > a:nth-of-type(2) {
   display: flex;
   align-items: center;
   gap: 0.5em;
@@ -443,7 +450,7 @@ main > section > a:nth-of-type(2) {
 }
 
 /* Pijltje naast knop */
-main > section > a:nth-of-type(2) svg {
+main > section > footer > a:nth-of-type(2) svg {
   width: 0.375rem;
   height: 0.625rem;
   transition: transform 200ms ease;
@@ -453,17 +460,17 @@ main > section > a:nth-of-type(2) svg {
 
 /* Footer Algemeen */
 
-footer {
+body > footer {
   background-color: var(--footer-color);
   color: var(--primary-color);
 }
 
-footer section {
+body > footer section {
   max-width: 80em;
   margin: 0 auto;
 }
 /* de 4 blokken met linkjes (ontdek, services ect.) */
-footer > section:first-of-type {
+body > footer > section:first-of-type {
   display: flex;
   flex-wrap: wrap;
   gap: 2em;
@@ -472,12 +479,12 @@ footer > section:first-of-type {
 }
 
 /* elke blokje appart */
-footer > section:first-of-type section {
+body > footer > section:first-of-type section {
   flex: 1 1 12em;
 }
 
 /* Alle kopjes */
-footer h3 {
+body > footer h3 {
   font-size: 1em;
   font-weight: 500;
   margin: 0 0 1em 1em;
@@ -485,13 +492,13 @@ footer h3 {
 }
 
 /* alle linkjes */
-footer ul {
+body > footer ul {
   list-style: none;
   margin: 0;
   padding: 0 0 0 1em;
 }
 
-footer section ul li a {
+body > footer section ul li a {
   position: relative;
   display: inline;
   padding: 0;
@@ -504,7 +511,7 @@ footer section ul li a {
   display: inline-block;
 }
 
-footer a::after {
+body > footer a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -514,16 +521,16 @@ footer a::after {
   background-color: var(--primary-color);
 }
 
-footer a:hover {
+body > footer a:hover {
   color: var(--primary-color);
 }
 
-footer a:hover::after {
+body > footer a:hover::after {
   width: 100%;
 }
 
 /* Nieuwsbrief section */
-footer > section:nth-of-type(2) {
+body > footer > section:nth-of-type(2) {
   background-color: var(--primary-text-color);
   padding: 2em 0;
   max-width: 50em;
@@ -531,14 +538,14 @@ footer > section:nth-of-type(2) {
 }
 
 /* titel */
-footer > section:nth-of-type(2) h2 {
+body > footer > section:nth-of-type(2) h2 {
   color: var(--secondary-text-color);
   font-size: 1.25em;
   margin: 0 0 1em 1em;
   font-weight: 400;
 }
 /* de nieuwsbrief formulier */
-footer > section:nth-of-type(2) form {
+body > footer > section:nth-of-type(2) form {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
@@ -547,12 +554,12 @@ footer > section:nth-of-type(2) form {
   margin: 0 0 0 0.6em;
 }
 /* de label*/
-footer > section:nth-of-type(2) label {
+body > footer > section:nth-of-type(2) label {
   grid-column: 1;
   width: 100%;
 }
 /* email input, voor toegankelijkheid een een border omheen gemaakt zodat het duidelijk is dat je hierin je email kunt invullen */
-footer > section:nth-of-type(2) input[type="email"] {
+body > footer > section:nth-of-type(2) input[type="email"] {
   width: 100%;
   background: none;
   border: 0.0625em solid var(--primary-color);
@@ -564,13 +571,13 @@ footer > section:nth-of-type(2) input[type="email"] {
   margin: 0 0.75em 0 0.5em;
 }
 
-footer > section:nth-of-type(2) input[type="email"]::placeholder {
+body > footer > section:nth-of-type(2) input[type="email"]::placeholder {
   color: var(--primary-color);
 }
 
 /* abboneren knop, voor toegankelijkheid een echte knop gemaakt */
 
-footer > section:nth-of-type(2) button {
+body > footer > section:nth-of-type(2) button {
   grid-column: 2;
   width: max-content;
   padding: 0.75em 1em;
@@ -585,11 +592,11 @@ footer > section:nth-of-type(2) button {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-footer > section:nth-of-type(2) button:hover {
+body > footer > section:nth-of-type(2) button:hover {
   border: var(--primary-color) solid;
 }
 /* tekst */
-footer > section:nth-of-type(2) p {
+body > footer > section:nth-of-type(2) p {
   grid-column: 1 / -1;
   font-size: 0.8em;
   color: var(--secondary-text-color);
@@ -597,14 +604,14 @@ footer > section:nth-of-type(2) p {
   font-weight: 300;
 }
 /* de link in de tekst */
-footer > section:nth-of-type(2) p a {
+body > footer > section:nth-of-type(2) p a {
   color: var(--secondary-text-color);
 }
 
 /* SOCIAL MEDIA */
 
 /* de 3 social media iconen*/
-footer > section:nth-of-type(3) {
+body > footer > section:nth-of-type(3) {
   position: relative;
   display: flex;
   justify-content: flex-start;
@@ -615,7 +622,7 @@ footer > section:nth-of-type(3) {
 }
 
 /* pseudo-element voor de “fake” border */
-footer > section:nth-of-type(3)::after {
+body > footer > section:nth-of-type(3)::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -628,7 +635,7 @@ footer > section:nth-of-type(3)::after {
 
 /* de iconen zelf */
 
-footer > section:nth-of-type(3) svg {
+body > footer > section:nth-of-type(3) svg {
   width: 1.5em;
   height: 1.5em;
   fill: var(--secondary-text-color);
@@ -637,13 +644,13 @@ footer > section:nth-of-type(3) svg {
   margin: 0 0 1em 0;
 }
 
-footer > section:nth-of-type(3) svg:hover {
+body > footer > section:nth-of-type(3) svg:hover {
   fill: var(--primary-color);
 }
 
 /* Cowboy logo + taal keuze sectie */
 
-footer > section:nth-of-type(4) {
+body > footer > section:nth-of-type(4) {
   position: relative;
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -653,7 +660,7 @@ footer > section:nth-of-type(4) {
   background-color: var(--primary-text-color);
 }
 /* Hidden h2 voor de screenreader */
-footer > section:nth-of-type(4) h2 {
+body > footer > section:nth-of-type(4) h2 {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -665,12 +672,12 @@ footer > section:nth-of-type(4) h2 {
   border: 0;
 }
 
-footer > section:nth-of-type(4) > a {
+body > footer > section:nth-of-type(4) > a {
   grid-column: 1 / -1;
 }
 
 /* logo */
-footer > section:nth-of-type(4) a svg {
+body > footer > section:nth-of-type(4) a svg {
   width: 10em;
   height: auto;
   color: var(--primary-color);
@@ -679,7 +686,7 @@ footer > section:nth-of-type(4) a svg {
 /* TALEN KIEZEN VANAF HIER */
 
 /* Alleen zichtbaar voor screenreaders */
-footer > section:nth-of-type(5) label[for="language-select"] {
+body > footer > section:nth-of-type(5) label[for="language-select"] {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -692,7 +699,7 @@ footer > section:nth-of-type(5) label[for="language-select"] {
 }
 
 /* zorgt ervoor dat de select en svg naast elkaar komen te staan */
-footer > section:nth-of-type(5) {
+body > footer > section:nth-of-type(5) {
   display: flex;
   position: relative;
   background-color: var(--primary-text-color);
@@ -700,7 +707,7 @@ footer > section:nth-of-type(5) {
 }
 
 /* pseudo-element voor de “fake” border */
-footer > section:nth-of-type(5)::after {
+body > footer > section:nth-of-type(5)::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -711,7 +718,7 @@ footer > section:nth-of-type(5)::after {
   background-color: var(--accent-color);
 }
 /* algemene stijling voor de select */
-footer > section:nth-of-type(5) select {
+body > footer > section:nth-of-type(5) select {
   appearance: none;
   background: transparent;
   border: none;
@@ -723,7 +730,7 @@ footer > section:nth-of-type(5) select {
 }
 
 /* Het pijltje naast de select */
-footer > section:nth-of-type(5) svg {
+body > footer > section:nth-of-type(5) svg {
   width: 100%;
   height: 1em;
   margin-left: 0.4em;
@@ -735,11 +742,11 @@ footer > section:nth-of-type(5) svg {
 }
 
 /* de 3 linkjes */
-footer > section:last-of-type {
+body > footer > section:last-of-type {
   background-color: var(--primary-text-color);
 }
 
-footer > section:last-of-type a {
+body > footer > section:last-of-type a {
   display: block;
   color: var(--secondary-text-color);
   text-decoration: none;
@@ -749,11 +756,11 @@ footer > section:last-of-type a {
   margin-left: 1em;
 }
 
-footer > section:last-of-type a:hover {
+body > footer > section:last-of-type a:hover {
   text-decoration: underline;
 }
 
-footer > section:last-of-type p {
+body > footer > section:last-of-type p {
   margin: 0;
   font-size: 0.7em;
   font-weight: 300;
