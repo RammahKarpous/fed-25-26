@@ -18,33 +18,81 @@ h1 {
   margin: 0;
 }
 
-/* Productsectie 1 */
-main > section:first-of-type {
-  background-color: var(--color-bg-1);
-  min-height: auto; /* Auto in plaats van 50em zodat de content dynamisch kan groeien op mobiel en elementen niet verdwijnen of te veel lege ruimte ontstaat */
+/* ==========================================================================
+   PRODUCTSECTIES 1 & 2 - Responsive Grid Layout
+   ========================================================================== */
+
+/* 
+ * PRODUCTSECTIE 1 & 2: Basis styling
+ * 
+ * Beide secties gebruiken een mobile-first aanpak:
+ * - Mobiel: flexbox column layout met elementen onder elkaar, gecentreerd
+ * - Desktop: grid layout met 2 kolommen voor betere visuele compositie
+ * 
+ * Verschillen tussen secties:
+ * - Sectie 1: afbeelding rechts, header links, margin-top voor spacing
+ * - Sectie 2: afbeelding links, header rechts, extra gap en padding voor ruimte
+ */
+
+/* Gemeenschappelijke basis styling voor beide productsecties */
+main > section:first-of-type,
+main > section:nth-of-type(2) {
+  /* Mobile-first: flexbox column voor verticale stacking */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  min-height: auto; /* Dynamische hoogte op mobiel voorkomt lege ruimte */
   padding: 2em 1em;
-  margin: 5em 0 0 0;
-  gap: 1.5em; /* Gap om er voor te zorgen dat er ruimte tussen de elementen ontstaat. */
+  gap: 1.5em; /* Ruimte tussen elementen */
 }
 
-/* Desktop: grid layout voor twee kolommen, padding aangepast voor grotere schermen, zodat de elementen makkelijker geplaatst kunnen worden */
+/* Sectie-specifieke achtergrondkleuren en margins */
+main > section:first-of-type {
+  background-color: var(--color-bg-1);
+  margin: 5em 0 0 0; /* Extra ruimte boven eerste sectie */
+}
+
+main > section:nth-of-type(2) {
+  background-color: var(--color-bg-2);
+  margin: 0;
+}
+
+/* Desktop: Grid layout voor beide secties (vanaf 65em / ~1040px) */
 @media (min-width: 65em) {
-  main > section:first-of-type {
+  main > section:first-of-type,
+  main > section:nth-of-type(2) {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto auto;
-    gap: 2em;
-    padding: 4em 2em;
-    min-height: 50em;
+    grid-template-columns: repeat(2, 1fr); /* Twee gelijke kolommen */
+    grid-template-rows: auto auto; /* Header en footer krijgen eigen rij */
+    padding: 4em 2em; /* Meer padding op desktop */
+    min-height: 50em; /* Vaste minimale hoogte voor consistentie */
+  }
 
-  }  
+  /* Sectie 1: kleinere gap tussen kolommen */
+  main > section:first-of-type {
+    gap: 2em;
+  }
+
+  /* Sectie 2: grotere gap voor meer ruimte tussen afbeelding en tekst */
+  main > section:nth-of-type(2) {
+    gap: 4em;
+  }
 }
 
-/* Mobile-first: kleinere font size en padding voor mobiel */
-main section:first-of-type > header > h2 {
+/* ==========================================================================
+   HEADER STYLING - Product titels en prijzen
+   ========================================================================== */
+
+/* 
+ * HEADER ELEMENTEN: Gemeenschappelijke mobile-first styling
+ * 
+ * Op mobiel zijn alle header elementen gecentreerd met kleinere font sizes.
+ * Op desktop worden ze links/rechts uitgelijnd met grotere fonts.
+ */
+
+/* H2: Product categorie (bijv. "Cruiser") - mobiel */
+main section:first-of-type > header > h2,
+main section:nth-of-type(2) > header > h2 {
   margin: 0 0 0.85em 0;
   padding-top: 3em;
   font-size: 1em;
@@ -53,25 +101,29 @@ main section:first-of-type > header > h2 {
   text-align: center;
 }
 
-main section:first-of-type > header > h3 {
+/* H3: Product tagline (bijv. "Go Dutch") - mobiel */
+main section:first-of-type > header > h3,
+main section:nth-of-type(2) > header > h3 {
   margin: 0 0 0.375em 0;
   font-size: 2.25em;
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.1; /* Compacte line-height voor grote headers */
   text-align: center;
   color: var(--secondary-color);
 }
 
-/* vanaf € 2.999 */
-main section:first-of-type > header > p {
+/* P: Prijs (bijv. "Vanaf €2.999") - mobiel */
+main section:first-of-type > header > p,
+main section:nth-of-type(2) > header > p {
   margin: 0 0 1em 0;
-  font-size: 0.75em;
+  font-size: 1em; /* Vergroot voor betere leesbaarheid */
   color: var(--quaternary-color);
   text-align: center;
 }
 
-/* Desktop: header links uitgelijnd, grotere font sizes */
+/* Desktop: Header positioning en grotere fonts */
 @media (min-width: 65em) {
+  /* Sectie 1: Header in linker kolom */
   main section:first-of-type > header {
     grid-column: 1;
     grid-row: 1;
@@ -82,173 +134,261 @@ main section:first-of-type > header > p {
     padding-top: 2em;
   }
 
-  main section:first-of-type > header > h2 {
+  /* Sectie 2: Header in rechter kolom met extra padding voor ruimte */
+  main section:nth-of-type(2) > header {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2em;
+    padding-left: 2em; /* Extra ruimte tussen afbeelding en tekst */
+  }
+
+  /* Desktop: Grotere font sizes en links uitgelijnd */
+  main section:first-of-type > header > h2,
+  main section:nth-of-type(2) > header > h2 {
     font-size: 1.5em;
     text-align: left;
   }
 
-  main section:first-of-type > header > h3 {
-    font-size: 4.125em;
+  main section:first-of-type > header > h3,
+  main section:nth-of-type(2) > header > h3 {
+    font-size: 4.125em; /* Zeer grote font voor impact */
     text-align: left;
   }
 
-  main section:first-of-type > header > p {
+  main section:first-of-type > header > p,
+  main section:nth-of-type(2) > header > p {
     text-align: left;
   }
 }
-/* Header wordt links uitgelijnd op desktop in plaats van gecentreerd */
 
-/* Mobile-first: fiets-afbeelding gecentreerd en volledige breedte op mobiel */
-main section:first-of-type > img {
+/* ==========================================================================
+   AFBEELDINGEN - Responsive positioning
+   ========================================================================== */
+
+/* 
+ * AFBEELDINGEN: Mobile-first centering, desktop grid positioning
+ * 
+ * Op mobiel: afbeeldingen zijn 120% breed en gecentreerd voor visuele impact.
+ * Op desktop: afbeeldingen worden in grid geplaatst met verschillende posities.
+ * 
+ * Sectie 1: Afbeelding rechts, gespiegeld voor visuele balans
+ * Sectie 2: Afbeelding links, kan naar links overlappen voor dynamisch effect
+ */
+
+/* Mobile-first: Afbeeldingen gecentreerd en breed voor impact */
+main section:first-of-type > img,
+main section:nth-of-type(2) > img {
   display: block;
-  width: 120%;
+  width: 120%; /* Breeder dan container voor visuele impact */
   height: auto;
   margin: 0 0 1.25em 0;
   position: relative;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); /* Perfect centreren */
 }
 
-/* Desktop: afbeelding in rechter kolom, groter gemaakt en gecentreerd, gespiegeld voor betere compositie */
+/* Desktop: Afbeelding positioning in grid */
 @media (min-width: 65em) {
+  /* Sectie 1: Afbeelding in rechter kolom, gespiegeld */
   main section:first-of-type > img {
-    grid-row: 1 / 3;
-    margin: 0;
+    grid-row: 1 / 3; /* Beslaat beide rijen (header + footer) */
     grid-column: 2;
+    margin: 0;
     width: 120%;
     max-width: none;
     left: 0;
-    transform: translateX(0) scaleX(-1);
+    transform: translateX(0) scaleX(-1); /* Horizontaal spiegelen */
     justify-self: center;
     align-self: center;
-    /* Afbeelding groter gemaakt (120%), gecentreerd binnen zijn kolom en gespiegeld voor betere visuele balans */
+  }
+
+  /* Sectie 2: Afbeelding in linker kolom, kan naar links overlappen */
+  main section:nth-of-type(2) > img {
+    grid-row: 1 / 3; /* Beslaat beide rijen (header + footer) */
+    grid-column: 1;
+    margin: 0;
+    width: 120%;
+    max-width: none;
+    left: 0;
+    transform: translateX(-10%); /* Naar links verschuiven voor overlap effect */
+    justify-self: start; /* Links uitgelijnd binnen kolom */
+    align-self: center;
   }
 }
 
-/* PRODUCSECTIE 2 */
-main > section:nth-of-type(2) {
-  background-color: var(--color-bg-2);
-  min-height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 2em 1em;
-  gap: 1.5em;
-}
+/* ==========================================================================
+   FOOTER STYLING - Buttons en USPs
+   ========================================================================== */
 
-/* Mobile-first: zelfde styling als eerste sectie header voor consistentie */
-main section:nth-of-type(2) > header > h2 {
-  margin: 0 0 0.85em 0;
-  padding-top: 3em;
-  font-size: 1em;
-  font-weight: 400;
-  color: var(--quaternary-color);
-  text-align: center;
-}
+/* 
+ * FOOTER: Responsive layout voor call-to-action buttons en USP lijst
+ * 
+ * Mobile-first:
+ * - Buttons en USPs onder elkaar, gecentreerd voor eenvoudige navigatie
+ * 
+ * Desktop:
+ * - Buttons naast elkaar, links uitgelijnd
+ * - USPs op nieuwe regel, links uitgelijnd
+ * - Grid positioning voor secties 1 & 2
+ */
 
-/* Deel het zadel,deel de vrijheid */
-main section:nth-of-type(2) > header > h3 {
-  margin: 0 0 0.375em 0;
-  font-size: 2.25em;
-  font-weight: 400;
-  line-height: 1.1;
-  text-align: center;
-  color: var(--secondary-color);
-}
-
-main section:nth-of-type(2) > header > p {
-  margin: 0 0 1em 0;
-  font-size: 0.75em;
-  color: var(--quaternary-color);
-  text-align: center;
-}
-
-/* Mobile-first: afbeelding volledige breedte, gecentreerd */
-main section:nth-of-type(2) > img {
-  display: block;
-  width: 120%;
-  height: auto;
-  margin: 0 0 1.25em 0;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-/* Footer styling mobiel: buttons onder elkaar, gecentreerd */
+/* Mobile: Footer layout - vertical stacking, gecentreerd */
 main section:first-of-type > footer,
-main section:nth-of-type(3) > footer {
+main section:nth-of-type(2) > footer,
+main section:nth-of-type(3) > footer,
+main section:nth-of-type(5) > footer {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5em;
 }
 
-/* Buttons op mobiel gecentreerd */
+/* Mobile: Buttons gecentreerd */
 main section:first-of-type > footer > a:first-of-type,
 main section:first-of-type > footer > a:nth-of-type(2),
+main section:nth-of-type(2) > footer > a:first-of-type,
+main section:nth-of-type(2) > footer > a:nth-of-type(2),
 main section:nth-of-type(3) > footer > a:first-of-type,
-main section:nth-of-type(3) > footer > a:nth-of-type(2) {
+main section:nth-of-type(3) > footer > a:nth-of-type(2),
+main section:nth-of-type(5) > footer > a:first-of-type,
+main section:nth-of-type(5) > footer > a:nth-of-type(2) {
   margin: 0 auto;
   display: inline-flex;
   align-items: center;
 }
 
-/* UL op mobiel gecentreerd */
+/* "Boek een gratis testrit" link wit maken */
+main section:first-of-type > footer > a:nth-of-type(2),
+main section:nth-of-type(2) > footer > a:nth-of-type(2),
+main section:nth-of-type(3) > footer > a:nth-of-type(2),
+main section:nth-of-type(5) > footer > a:nth-of-type(2) {
+  color: var(--primary-text-color); /* Wit voor betere zichtbaarheid */
+}
+
+/* Mobile: USP lijst gecentreerd */
 main section:first-of-type > footer > ul,
-main section:nth-of-type(3) > footer > ul {
+main section:nth-of-type(2) > footer > ul,
+main section:nth-of-type(3) > footer > ul,
+main section:nth-of-type(5) > footer > ul {
   width: 100%;
   justify-content: center;
 }
 
-/* Desktop: footer van eerste productsectie in grid layout */
+/* Desktop: Footer grid positioning en layout */
 @media (min-width: 65em) {
+  /* Sectie 1: Footer in linker kolom, onder header */
   main section:first-of-type > footer {
     grid-column: 1;
     grid-row: 2;
     padding-top: 1em;
   }
-  
-  /* Desktop: footer buttons naast elkaar en links uitgelijnd */
-  main section:first-of-type > footer,
+
+  /* Sectie 2: Footer in rechter kolom, onder header, met extra padding */
+  main section:nth-of-type(2) > footer {
+    grid-column: 2;
+    grid-row: 2;
+    padding-top: 1em;
+    padding-left: 2em; /* Extra ruimte voor consistentie met header */
+  }
+
+  /* Sectie 3: Footer in linker kolom, onder header (zoals sectie 1) */
   main section:nth-of-type(3) > footer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 1em;
-    row-gap: 1.5em;
+    grid-column: 1;
+    grid-row: 2;
+    padding-top: 1em;
+  }
+
+  /* Sectie 5: Footer in linker kolom, onder header (zoals sectie 3) */
+  main section:nth-of-type(5) > footer {
+    grid-column: 1;
+    grid-row: 2;
+    padding-top: 1em;
   }
   
-  /* Desktop: buttons links uitgelijnd */
+  /* Desktop: Footer layout - buttons naast elkaar, flex-wrap voor USPs */
+  main section:first-of-type > footer,
+  main section:nth-of-type(2) > footer,
+  main section:nth-of-type(3) > footer,
+  main section:nth-of-type(5) > footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* USPs gaan naar nieuwe regel */
+    align-items: flex-start;
+    gap: 1em;
+    row-gap: 1.5em; /* Ruimte tussen buttons en USPs */
+  }
+  
+  /* Desktop: Buttons links uitgelijnd (geen auto margin meer) */
   main section:first-of-type > footer > a:first-of-type,
   main section:first-of-type > footer > a:nth-of-type(2),
+  main section:nth-of-type(2) > footer > a:first-of-type,
+  main section:nth-of-type(2) > footer > a:nth-of-type(2),
   main section:nth-of-type(3) > footer > a:first-of-type,
-  main section:nth-of-type(3) > footer > a:nth-of-type(2) {
+  main section:nth-of-type(3) > footer > a:nth-of-type(2),
+  main section:nth-of-type(5) > footer > a:first-of-type,
+  main section:nth-of-type(5) > footer > a:nth-of-type(2) {
     margin: 0;
     display: inline-flex;
     align-items: center;
   }
   
-  /* Desktop: UL op nieuwe regel en links uitgelijnd */
+  /* Desktop: USP lijst op volledige breedte, links uitgelijnd */
   main section:first-of-type > footer > ul,
-  main section:nth-of-type(3) > footer > ul {
-    flex-basis: 100%;
+  main section:nth-of-type(2) > footer > ul,
+  main section:nth-of-type(3) > footer > ul,
+  main section:nth-of-type(5) > footer > ul {
+    flex-basis: 100%; /* Neemt volledige breedte in (nieuwe regel) */
     width: 100%;
     justify-content: flex-start;
     align-items: flex-start;
   }
 }
 
-/* Productsectie 3 */
+/* ==========================================================================
+   PRODUCTSECTIE 3 - Classic "Voel je één met je fiets"
+   ========================================================================== */
 
+/* 
+ * PRODUCTSECTIE 3: Responsive grid layout (zelfde patroon als sectie 1)
+ * 
+ * Deze sectie volgt hetzelfde responsive patroon als sectie 1:
+ * - Mobile-first: flexbox column layout, elementen gecentreerd
+ * - Desktop: grid layout met 2 kolommen
+ * - Afbeelding rechts, header en footer links (zoals sectie 1)
+ * 
+ * Aangepast van oude layout (space-around) naar moderne grid layout
+ * voor consistentie met andere productsecties.
+ */
+
+/* Basis styling - Mobile-first flexbox column */
 main > section:nth-of-type(3) {
   background-color: var(--color-bg-3);
-  min-height: 50em; /* Ook hier heb ik de height property veranderd naar min-height */
+  min-height: auto; /* Dynamische hoogte op mobiel voorkomt lege ruimte */
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start; /* Changed from space-around voor consistentie */
+  padding: 2em 1em; /* Zelfde padding als sectie 1 & 2 */
+  margin: 0;
+  gap: 1.5em; /* Ruimte tussen elementen */
 }
 
+/* Desktop: Grid layout (vanaf 65em / ~1040px) - Zelfde patroon als sectie 1 */
+@media (min-width: 65em) {
+  main > section:nth-of-type(3) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Twee gelijke kolommen */
+    grid-template-rows: auto auto; /* Header en footer krijgen eigen rij */
+    gap: 2em; /* Zelfde gap als sectie 1 */
+    padding: 4em 2em; /* Meer padding op desktop */
+    min-height: 50em; /* Vaste minimale hoogte voor consistentie */
+  }
+}
+
+/* Header styling - Mobile-first (gecentreerd) */
 main section:nth-of-type(3) > header > h2 {
   margin: 0 0 0.85em 0;
   padding-top: 3em;
@@ -258,31 +398,76 @@ main section:nth-of-type(3) > header > h2 {
   text-align: center;
 }
 
-/* Voel je één met je fiets */
+/* H3: Product tagline "Voel je één met je fiets" - Mobile */
 main section:nth-of-type(3) > header > h3 {
   margin: 0 0 0.375em 0;
   font-size: 2.25em;
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.1; /* Compacte line-height voor grote headers */
   text-align: center;
   color: var(--secondary-color);
 }
 
+/* P: Prijs "Vanaf €2.699" - Mobile (vergroot voor consistentie) */
 main section:nth-of-type(3) > header > p {
   margin: 0 0 1em 0;
-  font-size: 0.75em;
+  font-size: 1em; /* Vergroot van 0.75em voor consistentie met sectie 1 & 2 */
   color: var(--quaternary-color);
   text-align: center;
 }
 
+/* Desktop: Header positioning - Links uitgelijnd (zoals sectie 1) */
+@media (min-width: 65em) {
+  main section:nth-of-type(3) > header {
+    grid-column: 1; /* Linker kolom */
+    grid-row: 1; /* Eerste rij */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2em;
+  }
+
+  /* Desktop: Grotere font sizes en links uitgelijnd */
+  main section:nth-of-type(3) > header > h2 {
+    font-size: 1.5em;
+    text-align: left;
+  }
+
+  main section:nth-of-type(3) > header > h3 {
+    font-size: 4.125em; /* Zeer grote font voor impact */
+    text-align: left;
+  }
+
+  main section:nth-of-type(3) > header > p {
+    text-align: left;
+  }
+}
+
+/* Afbeelding - Mobile-first (gecentreerd en breed) */
 main section:nth-of-type(3) > img {
   display: block;
-  width: 120%;
+  width: 120%; /* Breeder dan container voor visuele impact */
   height: auto;
   margin: 0 0 1.25em 0;
   position: relative;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); /* Perfect centreren */
+}
+
+/* Desktop: Afbeelding rechts positioneren (zoals sectie 1) */
+@media (min-width: 65em) {
+  main section:nth-of-type(3) > img {
+    grid-row: 1 / 3; /* Beslaat beide rijen (header + footer) */
+    grid-column: 2; /* Rechter kolom */
+    margin: 0;
+    width: 120%;
+    max-width: none;
+    left: 0;
+    transform: translateX(0) scaleX(-1); /* Horizontaal spiegelen voor visuele balans */
+    justify-self: center;
+    align-self: center;
+  }
 }
 
 /* Meer dan een electrische fiets */
@@ -308,25 +493,65 @@ main section:nth-of-type(4) > h2 {
   color: var(--secondary-color);
 }
 
+/* Paragraph styling - Mobile-first met kleinere font-size */
 main section:nth-of-type(4) > p {
   margin: 0 0 1em 0;
-  font-size: 0.75em;
+  font-size: 1em; /* Kleinere font-size op mobiel */
   color: var(--quaternary-color);
   text-align: center;
+  max-width: 70ch; /* Beperkt breedte tot 70 karakters voor optimale leesbaarheid */
+  margin: 0 auto 1em auto; /* Auto margins voor centreren met max-width */
 }
 
-/* Productsectie 4 */
+/* Desktop: Groter font-size en max-width voor betere leesbaarheid */
+@media (min-width: 65em) {
+  main section:nth-of-type(4) > p {
+    font-size: 1.125em; /* Vergroot voor betere leesbaarheid op desktop */
+  }
+}
 
+/* ==========================================================================
+   PRODUCTSECTIE 5 - Cross "Gemaakt voor het avontuur"
+   ========================================================================== */
+
+/* 
+ * PRODUCTSECTIE 5: Responsive grid layout (zelfde patroon als sectie 3)
+ * 
+ * Deze sectie volgt hetzelfde responsive patroon als sectie 3:
+ * - Mobile-first: flexbox column layout, elementen gecentreerd
+ * - Desktop: grid layout met 2 kolommen
+ * - Afbeelding rechts, header en footer links (zoals sectie 3)
+ * 
+ * Aangepast van oude layout (space-around) naar moderne grid layout
+ * voor consistentie met andere productsecties.
+ */
+
+/* Basis styling - Mobile-first flexbox column */
 main > section:nth-of-type(5) {
   background-color: var(--color-bg-5);
-  height: 50em;
+  min-height: auto; /* Dynamische hoogte op mobiel voorkomt lege ruimte */
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start; /* Changed from space-around voor consistentie */
+  padding: 2em 1em; /* Zelfde padding als sectie 1, 2 & 3 */
+  margin: 0;
+  gap: 1.5em; /* Ruimte tussen elementen */
 }
 
-/* Cross */
-main section:nth-of-type(5) > h2 {
+/* Desktop: Grid layout (vanaf 65em / ~1040px) - Zelfde patroon als sectie 3 */
+@media (min-width: 65em) {
+  main > section:nth-of-type(5) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Twee gelijke kolommen */
+    grid-template-rows: auto auto; /* Header en footer krijgen eigen rij */
+    gap: 2em; /* Zelfde gap als sectie 1 & 3 */
+    padding: 4em 2em; /* Meer padding op desktop */
+    min-height: 50em; /* Vaste minimale hoogte voor consistentie */
+  }
+}
+
+/* Header styling - Mobile-first (gecentreerd) */
+main section:nth-of-type(5) > header > h2 {
   margin: 0 0 0.85em 0;
   padding-top: 3em;
   font-size: 1em;
@@ -335,72 +560,112 @@ main section:nth-of-type(5) > h2 {
   text-align: center;
 }
 
-/* gemaakt voor avontuur */
-main section:nth-of-type(5) > h3 {
+/* H3: Product tagline "Gemaakt voor het avontuur" - Mobile */
+main section:nth-of-type(5) > header > h3 {
   margin: 0 0 0.375em 0;
   font-size: 2.25em;
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.1; /* Compacte line-height voor grote headers */
   text-align: center;
   color: var(--primary-color);
 }
 
-/* Vanaf €3.999 */
-main section:nth-of-type(5) > p {
+/* P: Prijs "Vanaf €3.999" - Mobile (vergroot voor consistentie) */
+main section:nth-of-type(5) > header > p {
   margin: 0 0 1em 0;
-  font-size: 0.75em;
+  font-size: 1em; /* Vergroot van 0.75em voor consistentie met andere secties */
   color: var(--primary-color);
   text-align: center;
 }
 
-/* fiets afbeelding */
+/* Desktop: Header positioning - Links uitgelijnd (zoals sectie 3) */
+@media (min-width: 65em) {
+  main section:nth-of-type(5) > header {
+    grid-column: 1; /* Linker kolom */
+    grid-row: 1; /* Eerste rij */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2em;
+  }
+
+  /* Desktop: Grotere font sizes en links uitgelijnd */
+  main section:nth-of-type(5) > header > h2 {
+    font-size: 1.5em;
+    text-align: left;
+  }
+
+  main section:nth-of-type(5) > header > h3 {
+    font-size: 4.125em; /* Zeer grote font voor impact */
+    text-align: left;
+  }
+
+  main section:nth-of-type(5) > header > p {
+    text-align: left;
+  }
+}
+
+/* Afbeelding - Mobile-first (gecentreerd en breed) */
 main section:nth-of-type(5) > img {
   display: block;
-  width: 120%;
+  width: 120%; /* Breeder dan container voor visuele impact */
   height: auto;
   margin: 0 0 1.25em 0;
   position: relative;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); /* Perfect centreren */
 }
 
-/* witte ronde button */
-main > section:nth-of-type(5) > a:first-of-type {
-  background-color: var(--primary-color);
-  color: var(--primary-text-color);
+/* Desktop: Afbeelding rechts positioneren (zoals sectie 3) */
+@media (min-width: 65em) {
+  main section:nth-of-type(5) > img {
+    grid-row: 1 / 3; /* Beslaat beide rijen (header + footer) */
+    grid-column: 2; /* Rechter kolom */
+    margin: 0;
+    width: 120%;
+    max-width: none;
+    left: 0;
+    transform: translateX(0); /* Horizontaal spiegelen voor visuele balans */
+    justify-self: center;
+    align-self: center;
+  }
 }
 
-/* hover: kleuren omdraaien */
-main > section:nth-of-type(5) > a:first-of-type:hover {
-  background-color: var(--primary-text-color);
-  color: var(--primary-color);
-}
+/* 
+ * Oude button styling verwijderd - buttons zitten nu in footer
+ * en gebruiken de gemeenschappelijke footer button styling
+ */
 
-/* Boek een gratis testrit */
-main section:nth-of-type(5) a:last-of-type {
-  color: var(--primary-color);
-  font-weight: 400;
-}
+/* ==========================================================================
+   USP LIJST - Unique Selling Points styling
+   ========================================================================== */
 
-/* Pijl naast knop */
-main > section:nth-of-type(5) > a:last-of-type svg {
-  color: var(--primary-color);
-}
+/* 
+ * USP LIJST: Lijst met product features (bijv. "Find my Bike", "AdaptivePower")
+ * 
+ * De USP lijst verschijnt onder de call-to-action buttons in de footer.
+ * Bevat 3 items met scheidingslijnen ertussen.
+ * 
+ * Mobile: Gecentreerd met border-top voor visuele scheiding
+ * Desktop: Links uitgelijnd, consistent met footer layout
+ * 
+ * Secties 1 & 2: Grotere font sizes voor betere leesbaarheid
+ */
 
-/* VANAF HIER MINI USPS*/
+/* USP lijst container - Mobile-first styling */
 main > section > footer > a:nth-of-type(2) + ul {
   display: flex;
-  justify-content: center;
-  gap: 2em;
+  justify-content: center; /* Gecentreerd op mobiel */
+  gap: 2em; /* Ruimte tussen USP items */
   list-style: none;
   padding: 1em 0 3em 0;
   margin: 1em 1.25em 0 1.25em;
-  border-top: 0.0625em solid;
-  border-color: var(--border-color);
-  align-items: flex-end;
+  border-top: none; /* Border verwijderd */
+  align-items: flex-end; /* Items uitgelijnd op onderkant voor gelijke hoogte */
 }
 
-/* Hier heb ik de ul links uitgelijnd voor desktop */
+/* Desktop: USP lijst links uitgelijnd */
 @media (min-width: 65em) {
   main > section > footer > a:nth-of-type(2) + ul {
     justify-content: flex-start;
@@ -410,70 +675,62 @@ main > section > footer > a:nth-of-type(2) + ul {
   }
 }
 
-/* UL in footer: op mobiel gecentreerd, op desktop links uitgelijnd (zie media query hierboven) */
-
-/* 1. elk item in de lijst */
+/* USP lijst items - Positionering en scheidingslijnen */
 main > section > footer > a:nth-of-type(2) + ul > li {
-  position: relative;
+  position: relative; /* Voor absolute positioning van scheidingslijn */
   padding: 0 0.5em;
-  text-align: center;
+  text-align: center; /* Gecentreerd op mobiel */
 }
 
+/* Scheidingslijn tussen USP items (niet bij eerste item) */
 main > section > footer > a:nth-of-type(2) + ul > li:not(:first-child)::before {
   content: "";
   position: absolute;
-  left: -1em; /* lijn tussen de kolommen */
+  left: -1em; /* Precies tussen items */
   top: 0;
   bottom: 0;
   width: 0.0625em;
   background-color: var(--border-color);
 }
 
-/* 3. Bovenste regel  */
+/* USP titel (H4) - Standaard zwart voor secties 1, 2, 3 */
 main > section > footer > a:nth-of-type(2) + ul > li > h4 {
   margin: 0 0 0.25em;
-  font-size: 0.6em;
+  font-size: 0.9em; /* Vergroot van 0.6em naar 0.9em voor betere zichtbaarheid */
   font-weight: 400;
-  color: var(--quaternary-color);
+  color: var(--quaternary-color); /* Zwart voor standaard secties */
 }
 
-/* 4. onderste regel  */
+/* USP beschrijving (P) - Standaard zwart voor secties 1, 2, 3 */
 main > section > footer > a:nth-of-type(2) + ul > li > p {
   margin: 0;
-  font-size: 0.7em;
-  font-weight: 600;
-  color: var(--primary-text-color);
+  font-size: 1em; /* Vergroot van 0.7em naar 1em voor betere zichtbaarheid */
+  font-weight: 600; /* Iets dikker voor nadruk */
+  color: var(--primary-text-color); /* Zwart voor standaard secties */
 }
 
-/* Mini usp alleen section 5 */
-main > section:nth-of-type(5) > a:last-of-type + ul {
-  display: flex;
-  justify-content: center;
-  gap: 2em;
-  list-style: none;
-  padding: 1em 0 3em 0;
-  margin: 1.5em 1.25em 0 1.25em;
-  border-top: 0.0425em solid;
-  border-color: var(--border-color);
-
-  align-items: flex-end;
+/* Extra grote USPs voor eerste, tweede, derde en vijfde sectie - Nog betere leesbaarheid */
+main section:first-of-type > footer > a:nth-of-type(2) + ul > li > h4,
+main section:nth-of-type(2) > footer > a:nth-of-type(2) + ul > li > h4,
+main section:nth-of-type(3) > footer > a:nth-of-type(2) + ul > li > h4,
+main section:nth-of-type(5) > footer > a:nth-of-type(2) + ul > li > h4 {
+  font-size: 1em; /* Extra vergroot voor productsecties 1, 2, 3 & 5 */
 }
 
-/* lijn tussen alle items */
-main > section:nth-of-type(5) > a:last-of-type + ul + li {
-  border-color: var(--primary-color);
+main section:first-of-type > footer > a:nth-of-type(2) + ul > li > p,
+main section:nth-of-type(2) > footer > a:nth-of-type(2) + ul > li > p,
+main section:nth-of-type(3) > footer > a:nth-of-type(2) + ul > li > p,
+main section:nth-of-type(5) > footer > a:nth-of-type(2) + ul > li > p {
+  font-size: 1.1em; /* Extra vergroot voor productsecties 1, 2, 3 & 5 */
 }
 
-/* Bovenste regel  */
-main > section:nth-of-type(5) > a:last-of-type + ul > li > h4 {
-  color: var(--border-color);
-  font-weight: 300;
+/* Sectie 5: USP tekst wit maken (alleen sectie 5) */
+main section:nth-of-type(5) > footer > a:nth-of-type(2) + ul > li > h4 {
+  color: var(--secondary-text-color); /* Wit voor betere zichtbaarheid op sectie 5 */
 }
 
-/* onderste regel  */
-main > section:nth-of-type(5) > a:last-of-type + ul > li > p {
-  color: var(--primary-color);
-  font-weight: 300;
+main section:nth-of-type(5) > footer > a:nth-of-type(2) + ul > li > p {
+  color: var(--tertiary-color); /* Wit voor betere zichtbaarheid op sectie 5 */
 }
 
 /* Achtergrond afbeelding (Belgie) */
