@@ -228,7 +228,7 @@ main section:nth-of-type(2) > img {
  * FOOTER: Responsive layout voor call-to-action buttons en USP lijst
  * 
  * Mobile-first:
- * - Buttons en USPs onder elkaar, gecentreerd voor eenvoudige navigatie
+ * - Buttons en USPs onder elkaar, gecentreerd
  * 
  * Desktop:
  * - Buttons naast elkaar, links uitgelijnd
@@ -240,7 +240,8 @@ main section:nth-of-type(2) > img {
 main section:first-of-type > footer,
 main section:nth-of-type(2) > footer,
 main section:nth-of-type(3) > footer,
-main section:nth-of-type(5) > footer {
+main section:nth-of-type(5) > footer,
+main section:nth-of-type(7) > footer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -255,25 +256,26 @@ main section:nth-of-type(2) > footer > a:nth-of-type(2),
 main section:nth-of-type(3) > footer > a:first-of-type,
 main section:nth-of-type(3) > footer > a:nth-of-type(2),
 main section:nth-of-type(5) > footer > a:first-of-type,
-main section:nth-of-type(5) > footer > a:nth-of-type(2) {
+main section:nth-of-type(5) > footer > a:nth-of-type(2),
+main section:nth-of-type(7) > footer > a:first-of-type,
+main section:nth-of-type(7) > footer > a:nth-of-type(2) {
   margin: 0 auto;
   display: inline-flex;
   align-items: center;
 }
 
-/* "Boek een gratis testrit" link wit maken */
-main section:first-of-type > footer > a:nth-of-type(2),
-main section:nth-of-type(2) > footer > a:nth-of-type(2),
-main section:nth-of-type(3) > footer > a:nth-of-type(2),
-main section:nth-of-type(5) > footer > a:nth-of-type(2) {
-  color: var(--primary-text-color); /* Wit voor betere zichtbaarheid */
+/* "Boek een gratis testrit" link wit maken - Alleen voor secties 5 & 7 */
+main section:nth-of-type(5) > footer > a:nth-of-type(2),
+main section:nth-of-type(7) > footer > a:nth-of-type(2) {
+  color: var(--primary-color); /* Wit voor betere zichtbaarheid op secties 5 & 7 */
 }
 
 /* Mobile: USP lijst gecentreerd */
 main section:first-of-type > footer > ul,
 main section:nth-of-type(2) > footer > ul,
 main section:nth-of-type(3) > footer > ul,
-main section:nth-of-type(5) > footer > ul {
+main section:nth-of-type(5) > footer > ul,
+main section:nth-of-type(7) > footer > ul {
   width: 100%;
   justify-content: center;
 }
@@ -308,12 +310,21 @@ main section:nth-of-type(5) > footer > ul {
     grid-row: 2;
     padding-top: 1em;
   }
+
+  /* Sectie 7: Footer in rechter kolom, onder header (zoals sectie 2) */
+  main section:nth-of-type(7) > footer {
+    grid-column: 2;
+    grid-row: 2;
+    padding-top: 1em;
+    padding-left: 2em; /* Extra ruimte voor consistentie met header */
+  }
   
   /* Desktop: Footer layout - buttons naast elkaar, flex-wrap voor USPs */
   main section:first-of-type > footer,
   main section:nth-of-type(2) > footer,
   main section:nth-of-type(3) > footer,
-  main section:nth-of-type(5) > footer {
+  main section:nth-of-type(5) > footer,
+  main section:nth-of-type(7) > footer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; /* USPs gaan naar nieuwe regel */
@@ -330,7 +341,9 @@ main section:nth-of-type(5) > footer > ul {
   main section:nth-of-type(3) > footer > a:first-of-type,
   main section:nth-of-type(3) > footer > a:nth-of-type(2),
   main section:nth-of-type(5) > footer > a:first-of-type,
-  main section:nth-of-type(5) > footer > a:nth-of-type(2) {
+  main section:nth-of-type(5) > footer > a:nth-of-type(2),
+  main section:nth-of-type(7) > footer > a:first-of-type,
+  main section:nth-of-type(7) > footer > a:nth-of-type(2) {
     margin: 0;
     display: inline-flex;
     align-items: center;
@@ -340,7 +353,8 @@ main section:nth-of-type(5) > footer > ul {
   main section:first-of-type > footer > ul,
   main section:nth-of-type(2) > footer > ul,
   main section:nth-of-type(3) > footer > ul,
-  main section:nth-of-type(5) > footer > ul {
+  main section:nth-of-type(5) > footer > ul,
+  main section:nth-of-type(7) > footer > ul {
     flex-basis: 100%; /* Neemt volledige breedte in (nieuwe regel) */
     width: 100%;
     justify-content: flex-start;
@@ -370,7 +384,7 @@ main > section:nth-of-type(3) {
   min-height: auto; /* Dynamische hoogte op mobiel voorkomt lege ruimte */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Changed from space-around voor consistentie */
+  justify-content: flex-start; /* Veranderd van space-around voor consistentie */
   padding: 2em 1em; /* Zelfde padding als sectie 1 & 2 */
   margin: 0;
   gap: 1.5em; /* Ruimte tussen elementen */
@@ -532,7 +546,7 @@ main > section:nth-of-type(5) {
   min-height: auto; /* Dynamische hoogte op mobiel voorkomt lege ruimte */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Changed from space-around voor consistentie */
+  justify-content: flex-start; /* Veranderd van space-around voor consistentie */
   padding: 2em 1em; /* Zelfde padding als sectie 1, 2 & 3 */
   margin: 0;
   gap: 1.5em; /* Ruimte tussen elementen */
@@ -709,28 +723,32 @@ main > section > footer > a:nth-of-type(2) + ul > li > p {
   color: var(--primary-text-color); /* Zwart voor standaard secties */
 }
 
-/* Extra grote USPs voor eerste, tweede, derde en vijfde sectie - Nog betere leesbaarheid */
+/* Extra grote USPs voor eerste, tweede, derde, vijfde en zevende secties wat groter gemaakt voor leesbaarheid */
 main section:first-of-type > footer > a:nth-of-type(2) + ul > li > h4,
 main section:nth-of-type(2) > footer > a:nth-of-type(2) + ul > li > h4,
 main section:nth-of-type(3) > footer > a:nth-of-type(2) + ul > li > h4,
-main section:nth-of-type(5) > footer > a:nth-of-type(2) + ul > li > h4 {
-  font-size: 1em; /* Extra vergroot voor productsecties 1, 2, 3 & 5 */
+main section:nth-of-type(5) > footer > a:nth-of-type(2) + ul > li > h4,
+main section:nth-of-type(7) > footer > a:nth-of-type(2) + ul > li > h4 {
+  font-size: 1em; /* Extra vergroot voor productsecties 1, 2, 3, 5 & 7 */
 }
 
 main section:first-of-type > footer > a:nth-of-type(2) + ul > li > p,
 main section:nth-of-type(2) > footer > a:nth-of-type(2) + ul > li > p,
 main section:nth-of-type(3) > footer > a:nth-of-type(2) + ul > li > p,
-main section:nth-of-type(5) > footer > a:nth-of-type(2) + ul > li > p {
-  font-size: 1.1em; /* Extra vergroot voor productsecties 1, 2, 3 & 5 */
+main section:nth-of-type(5) > footer > a:nth-of-type(2) + ul > li > p,
+main section:nth-of-type(7) > footer > a:nth-of-type(2) + ul > li > p {
+  font-size: 1.1em; /* Extra vergroot voor productsecties 1, 2, 3, 5 & 7 */
 }
 
-/* Sectie 5: USP tekst wit maken (alleen sectie 5) */
-main section:nth-of-type(5) > footer > a:nth-of-type(2) + ul > li > h4 {
-  color: var(--secondary-text-color); /* Wit voor betere zichtbaarheid op sectie 5 */
+/* Secties 5 & 7: USP tekst wit maken */
+main section:nth-of-type(5) > footer > a:nth-of-type(2) + ul > li > h4,
+main section:nth-of-type(7) > footer > a:nth-of-type(2) + ul > li > h4 {
+  color: var(--secondary-text-color); /* Wit voor betere zichtbaarheid op secties 5 & 7 */
 }
 
-main section:nth-of-type(5) > footer > a:nth-of-type(2) + ul > li > p {
-  color: var(--tertiary-color); /* Wit voor betere zichtbaarheid op sectie 5 */
+main section:nth-of-type(5) > footer > a:nth-of-type(2) + ul > li > p,
+main section:nth-of-type(7) > footer > a:nth-of-type(2) + ul > li > p {
+  color: var(--tertiary-color); /* Wit voor betere zichtbaarheid op secties 5 & 7 */
 }
 
 /* Achtergrond afbeelding (Belgie) */
@@ -784,19 +802,48 @@ main > section:nth-of-type(6) > a:first-of-type:hover {
   color: var(--primary-color);
 }
 
-/* Productsectie 5 */
+/* ==========================================================================
+   PRODUCTSECTIE 7 - Cross ST "Niet te schokken"
+   ========================================================================== */
 
+/* 
+ * PRODUCTSECTIE 7: Responsive grid layout (zelfde patroon als sectie 2)
+ * 
+ * Deze sectie volgt hetzelfde responsive patroon als sectie 2:
+ * - Mobile-first: flexbox column layout, elementen gecentreerd
+ * - Desktop: grid layout met 2 kolommen
+ * - Afbeelding links, header en footer rechts (zoals sectie 2)
+ * 
+ * Aangepast van oude layout (space-around) naar moderne grid layout
+ * voor consistentie met andere productsecties.
+ */
+
+/* Basis styling - Mobile-first flexbox column */
 main > section:nth-of-type(7) {
   background-color: var(--color-bg-6);
-
-  height: 50em;
+  min-height: auto; /* Dynamische hoogte op mobiel voorkomt lege ruimte */
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start; /* Veranderd van space-around voor consistentie */
+  padding: 2em 1em; /* Zelfde padding als andere secties */
+  margin: 0;
+  gap: 1.5em; /* Ruimte tussen elementen */
 }
 
-/* Cross ST */
-main section:nth-of-type(7) > h2 {
+/* Desktop: Grid layout (vanaf 65em / ~1040px) - Zelfde patroon als sectie 2 */
+@media (min-width: 65em) {
+  main > section:nth-of-type(7) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Twee gelijke kolommen */
+    grid-template-rows: auto auto; /* Header en footer krijgen eigen rij */
+    gap: 4em; /* Zelfde gap als sectie 2 voor ruimte */
+    padding: 4em 2em; /* Meer padding op desktop */
+    min-height: 50em; /* Vaste minimale hoogte voor consistentie */
+  }
+}
+
+/* Header styling - Mobile-first (gecentreerd) */
+main section:nth-of-type(7) > header > h2 {
   margin: 0 0 0.85em 0;
   padding-top: 3em;
   font-size: 1em;
@@ -805,76 +852,83 @@ main section:nth-of-type(7) > h2 {
   text-align: center;
 }
 
-/* Niet te schokken */
-main section:nth-of-type(7) > h3 {
+/* H3: Product tagline "Niet te schokken" - Mobile */
+main section:nth-of-type(7) > header > h3 {
   margin: 0 0 0.375em 0;
   font-size: 2.25em;
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.1; /* Compacte line-height voor grote headers */
   text-align: center;
   color: var(--primary-color);
 }
 
-/* Vanaf €3.999 */
-main section:nth-of-type(7) > p {
+/* P: Prijs "Vanaf €3.999" - Mobile (vergroot voor consistentie) */
+main section:nth-of-type(7) > header > p {
   margin: 0 0 1em 0;
-  font-size: 0.75em;
+  font-size: 1em; /* Vergroot van 0.75em voor consistentie */
   color: var(--primary-color);
   text-align: center;
 }
 
-/* fiets afbeelding */
+/* Desktop: Header positioning - Rechts uitgelijnd (zoals sectie 2) */
+@media (min-width: 65em) {
+  main section:nth-of-type(7) > header {
+    grid-column: 2; /* Rechter kolom */
+    grid-row: 1; /* Eerste rij */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2em;
+    padding-left: 2em; /* Extra ruimte tussen afbeelding en tekst */
+  }
+
+  /* Desktop: Grotere font sizes en links uitgelijnd */
+  main section:nth-of-type(7) > header > h2 {
+    font-size: 1.5em;
+    text-align: left;
+  }
+
+  main section:nth-of-type(7) > header > h3 {
+    font-size: 4.125em; /* Zeer grote font voor impact */
+    text-align: left;
+  }
+
+  main section:nth-of-type(7) > header > p {
+    text-align: left;
+  }
+}
+
+/* Afbeelding - Mobile-first (gecentreerd en breed) */
 main section:nth-of-type(7) > img {
   display: block;
-  width: 120%;
+  width: 120%; /* Breeder dan container voor visuele impact */
   height: auto;
   margin: 0 0 1.25em 0;
   position: relative;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); /* Perfect centreren */
 }
 
-/* witte ronde button */
-main > section:nth-of-type(7) > a:first-of-type {
-  background-color: var(--primary-color);
-  color: var(--primary-text-color);
+/* Desktop: Afbeelding links positioneren (zoals sectie 2) */
+@media (min-width: 65em) {
+  main section:nth-of-type(7) > img {
+    grid-row: 1 / 3; /* Beslaat beide rijen (header + footer) */
+    grid-column: 1; /* Linker kolom */
+    margin: 0;
+    width: 120%;
+    max-width: none;
+    left: 0;
+    transform: translateX(-10%); /* Naar links verschuiven voor overlap effect */
+    justify-self: start; /* Links uitgelijnd binnen kolom */
+    align-self: center;
+  }
 }
 
-/* hover: kleuren omdraaien */
-main > section:nth-of-type(7) > a:first-of-type:hover {
-  background-color: var(--primary-text-color);
-  color: var(--primary-color);
-}
-
-/* Boek een gratis testrit */
-main section:nth-of-type(7) a:last-of-type {
-  color: var(--primary-color);
-}
-
-/* Pijl naast knop */
-main > section:nth-of-type(7) > a:last-of-type svg {
-  color: var(--primary-color);
-}
-
-/* Mini usp alleen section 5 */
-main > section:nth-of-type(7) > a:last-of-type + ul {
-  border-color: var(--primary-color);
-}
-
-/* lijn tussen alle items */
-main > section:nth-of-type(7) > a:last-of-type + ul + li {
-  border-color: var(--primary-color);
-}
-
-/* Bovenste regel  */
-main > section:nth-of-type(7) > a:last-of-type + ul > li > h4 {
-  color: var(--border-color);
-}
-
-/* onderste regel  */
-main > section:nth-of-type(7) > a:last-of-type + ul > li > p {
-  color: var(--primary-color);
-}
+/* 
+ * Oude button styling verwijderd - buttons zitten nu in footer
+ * en gebruiken de gemeenschappelijke footer button styling
+ */
 
 /* USP 1,2 en 3 */
 main section:nth-of-type(8) {
